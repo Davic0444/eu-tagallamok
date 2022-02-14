@@ -1,3 +1,4 @@
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -62,37 +63,33 @@ public class Task {
                 lastIndex = i;
             }
         }
-        System.out.println("Legutoljára csatlakozott ország: " + states.get(lastIndex).getCountry());
+        System.out.println("7. feladat: Legutoljára csatlakozott ország: " + states.get(lastIndex).getCountry());
     }
 
     public void joinStatistics() {
-
-        List<LocalDate> yearList = new ArrayList<>();
-
+        List<Integer> joinDate = new ArrayList<Integer>();
         for (int i = 0; i < states.size(); i++) {
             boolean isIn = false;
-            for (int j = 0; j < yearList.size(); j++) {
-                if (states.get(i).getEuJoin() == yearList.get(j)) {
+            for (int j = 0; j < joinDate.size(); j++) {
+                if (states.get(i).getEuJoin().getYear()==joinDate.get(j)){
                     isIn = true;
                 }
             }
-            if (isIn == false) {
-                yearList.add(states.get(i).getEuJoin());
+            if (isIn == false){
+                joinDate.add(states.get(i).getEuJoin().getYear());
             }
         }
-        int[] numberOfStates = new int[yearList.size()];
+        int[] listHelp = new int[joinDate.size()];
         for (int i = 0; i < states.size(); i++) {
-            for (int j = 0; j < yearList.size(); j++) {
-                if (states.get(i).getEuJoin() == yearList.get(j)) {
-                    numberOfStates[j]++;
+            for (int j = 0; j < joinDate.size(); j++) {
+                if (states.get(i).getEuJoin().getYear() == joinDate.get(j)){
+                    listHelp[j]++;
                 }
             }
         }
-
-        for (int i = 0; i < numberOfStates.length; i++) {
-            System.out.println("\t" + yearList.get(i) + ": " + numberOfStates[i] + " ország");
+        for (int i = 0; i < listHelp.length; i++) {
+            System.out.println(joinDate.get(i) + " - " + listHelp[i]);
         }
-
     }
 
 }
